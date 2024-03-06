@@ -1,0 +1,12 @@
+Jaki znak odpowiada za wskaüniki w C++?
++
+-
+*
+&
+3
+Jaki znak odpowiada za referencje w C++?
++
+-
+*
+&
+4
