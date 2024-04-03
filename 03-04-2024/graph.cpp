@@ -69,5 +69,41 @@ int main()
 	}
 
 	ppmOut.close();
+
+
+	/*
+	wartosc   separator wartosc sepearator
+	231;12312;3123123
+	123123;123123;31231
+	
+	liczba;ilosc_wystapien;
+	1;150;
+	2;300;
+	3;50;
+	...
+	...
+	*/
+
+	std::fstream csv;
+	csv.open("losowe.csv", std::ios::out);
+
+	if (csv.good())
+	{
+		csv << "liczba;ilosc_wystapien;\n";
+		for (auto [liczba, count] : numbers)
+		{
+			csv << liczba << ";" << count << ";\n";
+		}
+
+	}
+	else
+	{
+		cout << "Nie udalo sie utworzyc losowe.csv\n";
+	}
+	csv.close();
+
+
+
+	return 0;
 }
 
