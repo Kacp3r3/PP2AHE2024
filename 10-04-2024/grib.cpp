@@ -9,9 +9,9 @@ https://www.nco.ncep.noaa.gov/pmb/docs/on388/
 https://www.nco.ncep.noaa.gov/pmb/docs/on388/
 https://www.nco.ncep.noaa.gov/pmb/docs/on388/
 
+Do czytania bajtów z pliku najlepiej użyć metody read(tablica, rozmiar);
 
 */
-
 int main()
 {
 	fstream grib;
@@ -99,6 +99,8 @@ int main()
 	grib >> byte;
 
 
+	uint32_t start_section_1 = grib.tellg();
+
 	//Wczytujemy kolejno trzy bajty i umieszczamy je w 4 bajtowej zmiennej
 	uint32_t section_1_length = 0;
 	for (int i = 0; i < 3; ++i)
@@ -123,5 +125,28 @@ int main()
 	uint8_t process_id;
 	grib >> process_id;
 	cout << "Process id: " << (int)process_id;
+
+	grib.seekg(start_section_1+12);
+
+	char byte_char;
+
+
+	//grib >> byte >> byte2 >> byte3 >> byte4;
+
+
+
+	
+	//PRAWIDŁOWY SPOSOB NA ODCZYTYWANIE DANYCH Z PLIKU BINARNEGO
+	grib.read(&byte_char, 1);
+	cout << "\nYear: " << int(byte_char) << "\n";
+	grib.read(&byte_char, 1);
+	cout << "Month: " << int(byte_char) << "\n";
+	grib.read(&byte_char, 1);
+	cout << "Day: " << int(byte_char) << "\n";
+	grib.read(&byte_char, 1);
+	cout << "Hour: " << int(byte_char) << "\n";
+	grib.read(&byte_char, 1);
+	cout << "Minutes: " << int(byte_char) << "\n";
+	
 	return 0;
 }
